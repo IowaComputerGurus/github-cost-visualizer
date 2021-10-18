@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Publish
     env:
-      solution-path: './src/GitHub Cost Visualizer.sln'
-      webproject-path: './src/GitHubCostVisualizer.Web/GitHubCostVisualizer.Web.csproj'
+      solution-path: './Source/GitHub Cost Visualizer.sln'
+      webproject-path: './Source/GitHubCostVisualizer.Web/GitHubCostVisualizer.Web.csproj'
 
     steps:
     - uses: actions/checkout@v2
