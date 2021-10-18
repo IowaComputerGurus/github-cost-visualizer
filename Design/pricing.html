@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+  <title>Dashboard - ICG Admin: Responsive Bootstrap Template</title>
+
+  <!-- Stylesheets -->
+  <link href="/wwwroot/css/gijgo.min.css" rel="stylesheet" type="text/css">
+  <link href="/wwwroot/css/select2.min.css" rel="stylesheet" type="text/css">
+  <link href="/wwwroot/css/style.min.css" rel="stylesheet" type="text/css">
+  <link href="/wwwroot/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Javascript -->
+  <script type="text/javascript" src="/wwwroot/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/additional-methods.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/jquery.validate.unobtrusive.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/gijgo.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/highlight.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/select2.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/scripts.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid login">
+        <div class="row justify-content-center">
+            <div class='col-md-10 col-lg-8 col-xll-6 bg-white p-0'>
+                <div class="p-2 text-center">
+                    <img class="img-fluid mb-1" src="/wwwroot/images/iowa-computer-gurus.png" />
+                </div>
+                <div class="bg-light p-2 d-flex justify-content-center">
+                    <table class="table table-responsive table-striped pricing">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th class="border-0 h4 font-weight-bold">Features</th>
+                                <th class="text-center border-0">
+                                    <h6 class="font-weight-bold">Standard</h6>
+                                    <p class="mb-0">$8.99/month</p>
+                                </th>
+                                <th class="text-center border-0">
+                                    <h6 class="font-weight-bold pricing-plan-title">Business</h6>
+                                    <p class="mb-0">$12.99/month</p>
+                                </th>
+                                <th class="text-center border-0">
+                                    <div class="position-relative">
+                                        <h6 class="font-weight-bold pricing-plan-title">Enterprise</h6>
+                                        <p class="mb-0">Varies <i class="fas fa-info-circle"></i></p>
+                                        <a class="stretched-link" href="#" data-toggle="modal" data-target="#modalDisclaimerEnterprise"></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row" class="position-relative d-flex justify-content-between align-items-center">
+                                    Maximum # Hosts
+                                </td>
+                                <td class="text-center">10</td>
+                                <td class="text-center">20</td>
+                                <td class="text-center">Unlimited</td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="position-relative d-flex justify-content-between align-items-center">
+                                    Maximum # Attendees
+                                </td>
+                                <td class="text-center">100</td>
+                                <td class="text-center">480</td>
+                                <td class="text-center">Unlimited</td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="position-relative d-flex justify-content-between align-items-center">
+                                    <span class="mr-1">Simultaneous Meetings</span>
+                                    <i class="fas fa-info-circle ml-auto"></i>
+                                    <a class="stretched-link" href="#" data-toggle="modal" data-target="#modalDisclaimerSimult"></a>
+                                </td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">Unlimited</td>
+                                <td class="text-center">Unlimited</td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="position-relative d-flex justify-content-between align-items-center">
+                                    # of Meetings
+                                </td>
+                                <td class="text-center">Unlimited</td>
+                                <td class="text-center">Unlimited</td>
+                                <td class="text-center">Unlimited</td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="position-relative d-flex justify-content-between align-items-center">
+                                    File Sharing
+                                </td>
+                                <td class="text-center">No</td>
+                                <td class="text-center">Yes</td>
+                                <td class="text-center">Yes</td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="position-relative d-flex justify-content-between align-items-center">
+                                    <span class="mr-1">Cloud Storage</span>
+                                    <i class="fas fa-info-circle ml-auto"></i>
+                                    <a class="stretched-link" href="#" data-toggle="modal" data-target="#modalDisclaimerCloud"></a>
+                                </td>
+                                <td class="text-center">$40/month</td>
+                                <td class="text-center">$40/month</td>
+                                <td class="text-center">Yes</td>
+                            </tr>
+                            <tr>
+                                <td scope="row" class="position-relative d-flex justify-content-between align-items-center">
+                                    <span class="mr-1">Whitelabel Meetings</span>
+                                    <i class="fas fa-info-circle ml-auto"></i>
+                                    <a class="stretched-link" href="#" data-toggle="modal" data-target="#modalDisclaimerWhiteLabel"></a>
+                                <td class="text-center">No</td>
+                                <td class="text-center">No</td>
+                                <td class="text-center">Yes</td>
+                            </tr>
+                            <tr>
+                                <td scope="row"></td>
+                                <td class="text-center"><button class="btn btn-block btn-light btn-rounded">Go Standard</button></td>
+                                <td class="text-center"><button class="btn btn-block btn-primary btn-rounded">Go Business</button></td>
+                                <td class="text-center"><button class="btn btn-block btn-dark btn-rounded">Go Enterprise</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- Disclaimer Modal Simultaneous Meetings -->
+<div class="modal modal-primary modal-darker fade" id="modalDisclaimerSimult" tabindex="-1" role="dialog" aria-labelledby="modalDisclaimersSimult" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="modal-header">
+							<h5 class="modal-title" id="modalDisclaimerTitle">Simultaneous Meetings</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+							</button>
+					</div>
+					<div class="modal-body">
+							<p>We assume that the Business plan will have unlimited ability to have simultaneous meetings; enforcement of this will ONLY be on the time that the meeting was scheduled. MegaMeeting may allow a meeting to occur outside of the scheduled start time, any restriction of this manner will need to be validated with MegaMeeting.</p>
+					</div>
+			</div>
+	</div>
+</div>
+
+<!-- Disclaimer Modal Cloud Storage -->
+<div class="modal modal-primary modal-darker fade" id="modalDisclaimerCloud" tabindex="-1" role="dialog" aria-labelledby="modalDisclaimersCloud" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="modal-header">
+							<h5 class="modal-title" id="modalDisclaimerTitle">Cloud Storage</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+							</button>
+					</div>
+					<div class="modal-body">
+							<p>We need to validate this as a yes/no option within the MegaMeeting API; it seems to be an option but needs confirmation.</p>
+					</div>
+			</div>
+	</div>
+</div>
+
+<!-- Disclaimer Modal Whitelabel Meetings -->
+<div class="modal modal-primary modal-darker fade" id="modalDisclaimerWhiteLabel" tabindex="-1" role="dialog" aria-labelledby="modalDisclaimersWhiteLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="modal-header">
+							<h5 class="modal-title" id="modalDisclaimerTitle">Whitelabel Meetings</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+							</button>
+					</div>
+					<div class="modal-body">
+							<p>Whitelabel functionality will be limited to allowing users to customize the logos & options defined within MegaMeeting for an account, we will NOT white-label any of the developed solution, or notifications within the platform. (Users scheduling white-label mettings will need to send their own email notifications to attendees, to ensure proper white-label functionality)</p>
+					</div>
+			</div>
+	</div>
+</div>
+
+<!-- Disclaimer Modal Enterprise Plan -->
+<div class="modal modal-primary modal-darker fade" id="modalDisclaimerEnterprise" tabindex="-1" role="dialog" aria-labelledby="modalDisclaimersEnterprise" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="modal-header">
+							<h5 class="modal-title" id="modalDisclaimerTitle">Enterprise Plan</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+							</button>
+					</div>
+					<div class="modal-body">
+							<p>The Enterprise plan will be implemented as a manually assigned subscription type within the Chargify system, and will require the Customer to assign the subscription type of a user account. Users will NOT be able to select the Enterprise plan for a trial.</p>
+					</div>
+			</div>
+	</div>
+</div>
+
+</html>

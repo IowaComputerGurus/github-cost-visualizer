@@ -1,0 +1,139 @@
+.card {
+    margin-bottom:20px;
+    border-radius:2px;
+    border:1px solid rgba(0,0,0,.2);
+    h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+        margin-top:0;
+        @include font-size(14);
+        line-height:inherit;
+        font-weight:600;
+    }
+    p:last-child {
+        margin-bottom:0;
+    }
+    .card-header {
+        padding:9px 20px;
+        display:flex;
+        align-items:center;
+        border-radius:2px 2px 0 0;
+    }
+    .card-footer, .card-header {
+        background:#e8e8e8;
+    }
+    .card-footer {
+        border-radius:0 0 2px 2px;
+        border:none;
+        border-top:1px solid rgba(0,0,0,0.125);
+    }
+    &.loading {
+        user-select:none;
+        &:before {
+            content:'';
+            position:absolute;
+            top:-1px;
+            right:-1px;
+            bottom:-1px;
+            left:-1px;
+            background:$black;
+            opacity:.5;
+            z-index:1;
+        }
+        &:after {
+            content:'\f110';
+            position:absolute;
+            top:calc(50% - 24px);
+            left:calc(50% - 16px);
+            font-family:$fs-icon-normal;
+            font-weight:900;
+            animation:fa-spin 1s steps(8) infinite;
+            color:white;
+            @include font-size(32);
+            user-select:none;
+            z-index:2;
+        }
+    }
+    /* Unused Small Buttons
+    .card-header-controls {
+        .btn {
+            @extend .btn-sm;
+            margin-top:1px;
+        }
+    }
+    */
+    @each $color, $value in $bs-colors {
+        &.card-#{$color} {
+            border-color:lighten($value, 30%);
+            .card-header {
+                color:darken($value, 10%);
+                background:lighten($value, 40%);
+                border-color:lighten($value, 30%);
+            }
+            &.card-darker {
+                border-color:darken($value, 5%);
+                .card-header {
+                    background:darken($value, 5%);
+                    color:$white;
+                }
+            }
+            &.card-full {
+                color:darken($value, 10%);
+                background:lighten($value, 40%);
+                &.card-darker {
+                    color:$white;
+                    background:darken($value, 5%);
+                    border-color:darken($value, 5%);
+                    .card-header {
+                        border-color:rgba(255,255,255,0.5);
+                    }
+                }
+            }
+        }       
+    }
+    @each $color, $value in $cs-current {
+        &.card-#{$color} {
+            border-color:lighten($value, 30%);
+            .card-header {
+                color:darken($value, 10%);
+                background:lighten($value, 40%);
+                border-color:lighten($value, 30%);
+            }
+            &.card-darker {
+                border-color:darken($value, 5%);
+                .card-header {
+                    background:darken($value, 5%);
+                    color:$white;
+                }
+            }
+            &.card-full {
+                color:darken($value, 10%);
+                background:lighten($value, 40%);
+                &.card-darker {
+                    color:$white;
+                    background:darken($value, 5%);
+                    border-color:darken($value, 5%);
+                    .card-header {
+                        border-color:rgba(255,255,255,0.5);
+                    }
+                }
+            }
+        }       
+    }
+}
+
+.card-transparent {
+    border: none !important;
+    background: none !important;
+  
+    > .card-header {
+      background: none !important;
+    }
+  
+    > .card-body {
+      background: none !important;
+    }
+  
+    > .card-footer {
+      border: none !important;
+      background: none !important;
+    }
+  }

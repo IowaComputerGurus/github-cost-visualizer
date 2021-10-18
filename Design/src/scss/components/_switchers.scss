@@ -1,0 +1,149 @@
+$switcher-spacer-y:6px;
+$switcher-no-state-color:$white;
+$switcher-no-state-bg:$gray-900;
+$switcher-button-bg:$gray-600 !default;
+
+.switcher {
+    position: relative;
+    @include font-size(13);
+    display: block;
+    margin-bottom: $switcher-spacer-y;
+    cursor: pointer;
+    border-radius:3px;
+    font-weight:600;
+    padding-top:2px;
+    padding-bottom:2px;
+    padding-left:68px;
+
+    // Hide input
+    > input {
+        position: absolute;
+        z-index: -1;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+    }
+
+    &.switcher-blank {
+        padding: 0 !important;
+        width:56px;
+        height:26px;
+        .switcher-indicator {
+            top: 0 !important;
+            margin: 0 !important;
+        }
+    }
+
+    .form-horizontal & {
+        margin-top: $padding-base-vertical;
+        margin-bottom: 0;
+    }
+
+    .form-horizontal .form-group-lg &,
+    .form-horizontal.form-group-lg & {
+        margin-top: $padding-base-vertical + 1;
+    }
+
+    // Disabled state
+    > input:disabled ~ .switcher-indicator {
+        opacity: .65;
+        cursor: not-allowed !important;
+
+        &:after { 
+            box-shadow: none !important; 
+        }
+    }
+
+    .switcher-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        user-select: none;
+        border-radius: 3px;
+        font-weight: 700;
+        color: $switcher-no-state-color;
+        background: $switcher-no-state-bg;
+        transition-property: left, right, background;
+        transition-duration: .2s;
+
+        width:48px;
+        height:26px;
+        @include font-size(10);
+        line-height:26px;
+
+        &:after {
+            width:20px;
+            height:20px;
+            margin:3px 0 0 3px;
+            position: absolute;
+            left: 0;
+            display: block;
+            content: "";
+            transition: left .2s;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            background: $white;
+        }
+    }
+
+    // Checked / Unchecked states
+    .switcher-no,
+    .switcher-yes {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transition: all .2s;
+        text-align: center;
+    }
+
+    // Unchecked state
+    .switcher-no { 
+        left: 0;
+        padding-left:22px;
+    }
+    .switcher-yes { 
+        left: -100%;
+        padding-right:22px;
+        background:$switcher-button-bg;   
+    }
+
+    // Checked state
+    & > input:checked ~ .switcher-indicator {
+        .switcher-no { 
+            left: 100%; 
+        }
+        .switcher-yes { 
+            left: 0;
+            padding-right:22px;
+        }
+        &:after {
+            left:22px;
+        }
+    }
+    & > input:focus ~ .switcher-indicator:after {
+        box-shadow:0 0 0 1px $gray-600 inset;
+    }
+
+    // Rounded
+    .switcher-rounded .switcher-indicator,
+    .switcher-rounded .switcher-indicator:after {
+        border-radius: 999px;
+    }
+
+    @each $color, $value in $cs-current {
+        &.switcher-#{$color} {
+            .switcher-yes {
+                background:$value;
+            }
+        }       
+    }
+    @each $color, $value in $bs-colors {
+        &.switcher-#{$color} {
+            .switcher-yes {
+                background:$value;
+            }
+        }       
+    }
+}

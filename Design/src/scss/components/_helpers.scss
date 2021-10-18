@@ -1,0 +1,19 @@
+// FontAwesome
+.fa-rotate-225 {
+    transform:rotate(225deg);
+}
+.fa-rotate-315 {
+    transform:rotate(315deg);
+}
+
+@each $color, $value in $bs-colors {
+    .text-#{$color} {
+      color:$value !important;
+    }
+}
+
+@for $i from 1 through 10 {
+    .opacity-#{$i} {
+        opacity:($i / 10);
+    }
+}

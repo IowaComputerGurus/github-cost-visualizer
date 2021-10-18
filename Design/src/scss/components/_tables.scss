@@ -1,0 +1,60 @@
+.table td {
+    vertical-align:inherit;
+    
+    .btn {
+        @include font-size(13);
+    }
+}
+
+table.dataTable thead .sorting {
+    background-image:none !important;
+}
+
+.dataTables_length select {
+    padding-right:2rem !important;
+}
+
+.table-header {
+    @include font-size(15);
+    font-weight:600;
+    display:flex;
+    border-bottom:none;
+    border-top-right-radius:2px;
+    border-top-left-radius:2px;
+    padding:10px 15px;
+}
+
+.table-header-buttons {
+    margin:0 0 0 auto;
+    .btn {
+        @include font-size(11);
+        padding:2px 7px;
+        margin-top:1px;
+    }
+}
+
+@each $color, $value in $cs-current {
+    .table-colored-#{$color} {
+        .table-header {
+            background:darken($value, 5%);
+            color:$white;
+        }
+    }
+}
+
+@each $color, $value in $bs-colors {
+    .table-colored-#{$color} {
+        .table-header {
+            background:darken($value, 5%);
+            color:$white;
+        }
+    }
+}
+
+/*Gijgo FontAwesome Overrides */
+.fa-sort-amount-asc:after {
+    content: '\f885';
+}
+.fa-sort-amount-desc:after {
+    content: '\f160';
+}

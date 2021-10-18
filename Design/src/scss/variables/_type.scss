@@ -1,0 +1,52 @@
+$base-font-size:16;
+$base-line-height:1.5;
+$base-scale-factor:1.618;
+
+// Font Definitions
+$ft-open-sans: 'Open Sans', sans-serif;
+$ft-fa-brands: 'Font Awesome 5 Brands';
+$ft-fa-normal: 'Font Awesome 5 Free';
+
+// Font Schemes
+$fs-default: (
+    "main":$ft-open-sans,
+    "header":$ft-open-sans,
+    "decor":$ft-open-sans,
+    "icon-brand":$ft-fa-brands,
+    "icon-normal":$ft-fa-normal
+);
+
+// Choose Font Scheme
+$fs-current: $fs-default;
+
+// Font Builder - Don't Edit
+$fs-main:map-get($fs-current, 'main');
+$fs-header:map-get($fs-current, 'header');
+$fs-decor:map-get($fs-current, 'decor');
+$fs-icon-brand:map-get($fs-current, 'icon-brand');
+$fs-icon-normal:map-get($fs-current, 'icon-normal');
+
+// Weights
+$weights: (
+    "thin":100,
+    "extralight":200, 
+    "light":300,
+    "regular":400,
+    "medium":500,
+    "semibold":600,
+    "bold":700,
+    "extrabold":800,
+    "black":900
+);
+
+// Expand Bootstrap's Display
+.display-5 {
+    @include font-size(48);
+    font-weight: 300;
+    line-height: 1.2;
+}
+.display-6 {
+    @include font-size(40);
+    font-weight: 300;
+    line-height: 1.2;
+}

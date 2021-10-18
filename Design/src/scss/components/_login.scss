@@ -1,0 +1,16 @@
+.login {
+    height:100%;
+    min-height:100vh;
+    .row {
+        padding-top:60px;
+        padding-bottom:60px;
+    }
+    background: $primary;
+    background: linear-gradient(320deg, rgba( $dark, 1) 0%, rgba($primary, 1) 35%, rgba($light, 1) 100%);
+    .pricing {
+        width:auto;
+        th, td {
+            padding:.5rem;
+        }
+    }
+}

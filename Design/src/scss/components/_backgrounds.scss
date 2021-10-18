@@ -1,0 +1,9 @@
+// bg classes from current color scheme
+@each $color, $value in $cs-current {
+    @include bg-variant('.bg-#{$color}', $value);
+}
+
+// bg classes from grayscale array
+@each $color, $value in $grayscale {
+    @include bg-variant('.bg-#{$color}', $value);
+}

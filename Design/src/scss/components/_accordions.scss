@@ -1,0 +1,134 @@
+.accordion {
+    > .card {
+        margin-bottom:10px;
+        // css trick to increase specificity and prevent !important
+        &:not(.fake){
+            border-bottom:1px solid rgba(black,0.2);
+            border-radius:2px;
+        }
+        > .card-header {
+            padding:0;
+        }
+    }
+    .accordion-toggle {
+        @extend h5;
+        position:relative;
+        color:$dark-accent;
+        appearance:none;
+        border:none;
+        background:transparent;
+        padding:9px 20px;
+        width:100%;
+        text-align:left;
+        &:focus {
+            outline:none;
+        }
+        &:before, &:after {
+            position:absolute;
+            right:20px;
+            top:calc(50% - 1px);
+            width:14px;
+            height:2px;
+            border-radius:1px;
+            background-color:$dark-accent;
+            content:'';
+        }
+        &:after {
+            transform:rotate(90deg);
+            transition:.15s all ease-out;
+        }
+        &[aria-expanded="true"]:after {
+            transform:rotate(0deg);
+        }
+    }
+
+    @each $color, $value in $bs-colors {
+        &.accordion-#{$color} {
+            .card {
+                border-color:lighten($value, 30%);
+                .card-header {
+                    color:darken($value, 10%);
+                    background:lighten($value, 40%);
+                    border-color:lighten($value, 30%);
+                }
+            }
+            &.accordion-darker .card {
+                border-color:darken($value, 5%);
+                .card-header {
+                    background:darken($value, 5%);
+                    .accordion-toggle {
+                        color:$white;
+                        &:before, &:after {
+                            background:$white;
+                        }
+                    }
+                }
+            }
+            &.accordion-full {
+                .card {
+                    color:darken($value, 10%);
+                    background:lighten($value, 40%);
+                    .accordion-toggle {
+                        color:inherit;
+                        &:before, &:after {
+                            background-color:darken($value, 10%);
+                        }
+                    }
+                }
+                &.accordion-darker .card {
+                    color:$white;
+                    background:darken($value, 5%);
+                    border-color:darken($value, 5%);
+                    .card-header {
+                        border-color:rgba(255,255,255,0.5);
+                    }
+                }
+            }
+        }      
+    }
+    @each $color, $value in $cs-current {
+        &.accordion-#{$color} {
+            .card {
+                border-color:lighten($value, 30%);
+                .card-header {
+                    color:darken($value, 10%);
+                    background:lighten($value, 40%);
+                    border-color:lighten($value, 30%);
+                }
+            }
+            &.accordion-darker .card {
+                border-color:darken($value, 5%);
+                .card-header {
+                    background:darken($value, 5%);
+                    .accordion-toggle {
+                        color:$white;
+                        &:before, &:after {
+                            background:$white;
+                        }
+                    }
+                }
+            }
+            &.accordion-full {
+                .card {
+                    color:darken($value, 10%);
+                    background:lighten($value, 40%);
+                    .accordion-toggle {
+                        color:inherit;
+                        &:before, &:after {
+                            background-color:darken($value, 10%);
+                        }
+                    }
+                }
+                &.accordion-darker .card {
+                    color:$white;
+                    background:darken($value, 5%);
+                    border-color:darken($value, 5%);
+                    .card-header {
+                        border-color:rgba(255,255,255,0.5);
+                    }
+                }
+            }
+        }       
+    }
+}
+

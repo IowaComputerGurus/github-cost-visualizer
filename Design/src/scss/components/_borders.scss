@@ -1,0 +1,6 @@
+// border iterations for each cs-current color
+@each $color, $value in $cs-current {
+    .border-#{$color} {
+      border-color: $value !important;
+    }
+}

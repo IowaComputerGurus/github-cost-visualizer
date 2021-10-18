@@ -1,0 +1,72 @@
+// Strips units from numbers
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+// Uses one font-size declaration to create REM with PX fallback
+@mixin font-size($font-size) {
+  font-size: $font-size + px;
+  font-size: ($font-size / $base-font-size) + rem;
+}
+
+// Uses font semantics for weights
+@mixin font-weight($weight) {
+  font-weight:map-get($weights, $weight);
+}
+
+// Creates responsive fontsizes
+@mixin font-responsive($mobile, $tablet, $desktop) {
+  @include font-size($mobile);
+  @include mq-min-width(576) {
+    @include font-size($tablet);
+  }
+  @include mq-min-width(960) {
+    @include font-size($desktop);
+  }
+}
+
+// Uses normal tracking as letter-spacing
+@mixin letter-spacing($tracking){
+  letter-spacing: ($tracking / 1000) * 1rem; 
+}
+
+// Vertical rhythm
+@mixin font-baseline($font-size, $line-height){
+	@include font-size($font-size);
+	line-height: $line-height / $base-font-size + rem;
+  margin-top: $base-line-height + rem; 
+}
+
+// Mix Colors
+@function tint($color1, $color2, $percentage) {
+  @return mix($color1, $color2, $percentage);
+}
+
+// Used to set attributes below a specified breakpoint
+@mixin mq-max-width( $width-in-px ) {
+  $width: strip-unit( $width-in-px );
+  @media only screen and (max-width: ($width / $base-font-size) * 1em ) {
+    @content;
+  }
+}
+
+// Used to set attributes above a specified breakpoint
+@mixin mq-min-width( $width-in-px ) {
+  $width: strip-unit( $width-in-px );
+  @media only screen and (min-width: ($width / $base-font-size) * 1em ) {
+    @content;
+  }
+}
+
+// Reverse outline to solid buttons
+@mixin button-reverse-outline-variant($color, $color-hover: color-yiq($color), $active-background: $color, $active-border: $color) {
+  color: white;
+  background-color: $color;
+  background-image: none;
+  border-color: $color;
+  &:hover, &:focus {
+    color: $color-hover;
+    background-color: transparent;
+    border-color: $active-border;
+  }
+}

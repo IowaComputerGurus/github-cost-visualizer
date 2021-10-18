@@ -1,0 +1,36 @@
+﻿@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Start";
+}
+
+<h3 class="text-center">Github Usage Visualizer</h3>
+
+<p>Unsure of where your money is going with your Github account?  Upload your recent Usage report from Github to get a visual on where your money is going</p>
+
+<form asp-controller="Home" asp-action="Report" enctype="multipart/form-data">
+    
+    <label>Github Usage File</label>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" asp-for="UploadFile">
+        <label class="custom-file-label" for="UploadFile">Choose file...</label>
+        <span class="text-danger" asp-validation-for="UploadFile"></span>
+    </div>
+    
+    <div class="alert alert-info mt-1">
+        Your uploaded file is never stored and processed in real-time only.
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary w-100" type="submit">
+            Build My Report
+        </button>
+    </div>
+</form>
+
+@section scripts{
+    <script>
+        handleFilePickers(".custom-file-input");
+    </script>
+}

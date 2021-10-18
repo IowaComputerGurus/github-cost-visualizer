@@ -1,0 +1,154 @@
+﻿@model UsageReportViewModel
+
+
+
+<div class="card">
+    <div class="card-header">
+        <h5>Action Minutes Analysis</h5>
+    </div>
+    <div class="card-body">
+        <nav>
+            <div class="nav nav-tabs tabs-md" id="nav-tab-action-repository" role="tablist">
+                <a class="nav-item nav-link active" id="nav-tab-action-repository-list-tab"
+                   data-toggle="tab"
+                   href="#nav-tab-action-repository-list"
+                   role="tab"
+                   aria-controls="nav-tab-action-repository-list"
+                   aria-selected="True">
+                    List (By Repo)
+                </a>
+                <a class="nav-item nav-link"
+                   id="nav-tab-action-repository-chart-tab"
+                   data-toggle="tab"
+                   href="#nav-tab-action-repository-chart"
+                   role="tab"
+                   aria-controls="nav-tab-action-repository-chart"
+                   aria-selected="False">
+                    Chart (By Repo)
+                </a>
+                <a class="nav-item nav-link"
+                   id="nav-tab-action-system-list-tab"
+                   data-toggle="tab"
+                   href="#nav-tab-action-system-list"
+                   role="tab"
+                   aria-controls="nav-tab-action-system-list"
+                   aria-selected="False">
+                    List (By OS)
+                </a>
+                <a class="nav-item nav-link"
+                   id="nav-tab-action-system-chart-tab"
+                   data-toggle="tab"
+                   href="#nav-tab-action-system-chart"
+                   role="tab"
+                   aria-controls="nav-tab-action-system-chart"
+                   aria-selected="False">
+                    Chart (By OS)
+                </a>
+            </div>
+        </nav>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="nav-tab-action-repository-list" role="tabpanel" aria-labelledby="nav-tab-action-repository-list-tab">
+                <table class="display">
+                    <thead>
+                        <tr>
+                            <th>Repository</th>
+                            <th>Minutes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ActionMinutesByRepository)
+                        {
+                            <tr>
+                                <td>@item.Key</td>
+                                <td data-sort="@item.Value">@item.Value minutes</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="nav-tab-action-repository-chart" role="tabpanel" aria-labelledby="nav-tab-action-repository-chart-tab">
+                <canvas id="action-minutes-by-repository-chart" width="300" height="250"></canvas>
+                <script>
+                var actionMinChartContext = $('#action-minutes-by-repository-chart');
+                var actionMinChart = new Chart(actionMinChartContext,
+                    {
+                        type: 'pie',
+                        data: {
+                            datasets: [
+                                {
+                                    data: [@Html.Raw(string.Join(", ", Model.ActionMinutesByRepository.Select(s => s.Value)))],
+                                    backgroundColor: getColors(@Model.ActionMinutesByRepository.Count, 'primary', 'dark', 'secondary', 'light')
+                                }
+                            ],
+                            labels: [@Html.Raw(String.Join(", ", Model.ActionMinutesByRepository.Select(m => $"'{m.Key}'")))]
+                        },
+                        options: {
+                            tooltips: {
+                                enabled: true,
+                                callbacks: {
+                                    label: function(tooltipItem, data) {
+                                        var label = data.labels[tooltipItem.index];
+                                        var val = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                        return label + ':' + val + ' (' + (100 * val / @Html.Raw(Model.ActionMinutesByRepository.Sum(d => d.Value))).toFixed(2) + '%)';
+                                    }
+                                }
+
+                            }
+                        }
+                    });
+                </script>
+            </div>
+            <div class="tab-pane fade" id="nav-tab-action-system-list" role="tabpanel" aria-labelledby="nav-tab-action-system-list-tab">
+                <table class="display">
+                    <thead>
+                        <tr>
+                            <th>Operating System</th>
+                            <th>Minutes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ActionsSummary)
+                        {
+                            <tr>
+                                <td>@item.Key</td>
+                                <td data-sort="@item.Value">@item.Value minutes</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="nav-tab-action-system-chart" role="tabpanel" aria-labelledby="nav-tab-action-system-chart-tab">
+                <canvas id="action-minutes-by-os-chart" width="300" height="250"></canvas>
+                <script>
+                    var actionMinOsChartContext = $('#action-minutes-by-os-chart');
+                    var actionMinOsChart = new Chart(actionMinOsChartContext,
+                        {
+                            type: 'pie',
+                            data: {
+                                datasets: [
+                                    {
+                                        data: [@Html.Raw(string.Join(", ", Model.ActionsSummary.Select(s => s.Value)))],
+                                        backgroundColor: getColors(@Model.ActionsSummary.Count, 'primary', 'dark', 'secondary', 'light')
+                                    }
+                                ],
+                                labels: [@Html.Raw(String.Join(", ", Model.ActionsSummary.Select(m => $"'{m.Key}'")))]
+                            },
+                            options: {
+                                tooltips: {
+                                    enabled: true,
+                                    callbacks: {
+                                        label: function(tooltipItem, data) {
+                                            var label = data.labels[tooltipItem.index];
+                                            var val = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                            return label + ':' + val + ' (' + (100 * val / @Html.Raw(Model.ActionsSummary.Sum(d => d.Value))).toFixed(2) + '%)';
+                                        }
+                                    }
+
+                                }
+                            }
+                        });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

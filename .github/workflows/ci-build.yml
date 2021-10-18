@@ -1,0 +1,45 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and Publish
+    env:
+      solution-path: './Source/GitHub Cost Visualizer.sln'
+      webproject-path: './Source/GitHubCostVisualizer.Web/GitHubCostVisualizer.Web.csproj'
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Ensure .NET Installed
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        
+    - name: Install GitVersion
+      run: dotnet tool install --global GitVersion.Tool
+
+    - name: Determine Version
+      id: gitversion
+      uses: gittools/actions/gitversion/execute@v0.9.7
+      with:
+        useConfigFile: true 
+      
+    - name: Restore Packages
+      run: dotnet restore "${{ env.solution-path }}"
+    - name: Build
+      run: dotnet build "${{ env.solution-path }}" --no-restore --configuration Release -p:version=${{ steps.gitversion.outputs.majorMinorPatch }}
+    - name: Publish
+      run: dotnet publish "${{ env.webproject-path }}" --runtime win-x64 --configuration Release --output ./App --no-restore  -p:version=${{ steps.gitversion.outputs.majorMinorPatch }}
+    
+    
+    
