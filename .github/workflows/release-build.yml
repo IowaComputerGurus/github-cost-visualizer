@@ -1,0 +1,66 @@
+name: Production Release (On Tag)
+
+on:
+  push:
+    tags: 
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and Publish
+    env:
+      solution-path: './src/GitHub Cost Visualizer.sln'
+      webproject-path: './src/GitHubCostVisualizer.Web/GitHubCostVisualizer.Web.csproj'
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Ensure .NET Installed
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        
+    - name: Install GitVersion
+      run: dotnet tool install --global GitVersion.Tool
+
+    - name: Determine Version
+      id: gitversion
+      uses: gittools/actions/gitversion/execute@v0.9.7
+      with:
+        useConfigFile: true 
+      
+    - name: Restore Packages
+      run: dotnet restore "${{ env.solution-path }}"
+    - name: Build
+      run: dotnet build "${{ env.solution-path }}" --no-restore --configuration Release -p:version=${{ steps.gitversion.outputs.majorMinorPatch }}
+    - name: Publish
+      run: dotnet publish "${{ env.webproject-path }}" --runtime win-x64 --configuration Release --output ./App --no-restore  -p:version=${{ steps.gitversion.outputs.majorMinorPatch }}
+    - name: Store App Artifacts
+      if: github.event_name != 'pull_request'
+      uses: actions/upload-artifact@v2
+      with:
+        name: published-app
+        path: App
+        retention-days: 5 # only need long enough to test/validate
+
+  
+  deploy-prod:
+    needs: [build]
+    environment: production
+    if: github.event_name != 'pull_request'
+    runs-on: windows-latest
+    name: Deploy to Production
+    
+    steps:
+    - name: Download Artifacts
+      uses: actions/download-artifact@v2
+    
+    - name: 'Deploy APP to Prod Server'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: "githubcostvisualizer" 
+        publish-profile: ${{ secrets.PROD_PROFILE  }} 
+        package: './published-app/'    

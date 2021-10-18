@@ -2,7 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
+
 
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="27.1.1" />
