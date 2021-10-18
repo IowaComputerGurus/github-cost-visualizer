@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using CsvHelper;
 using GitHubCostVisualizer.Web.Processor;
 
@@ -30,7 +29,7 @@ namespace GitHubCostVisualizer.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Report(HomeViewModel data)
+        public IActionResult Report(HomeViewModel data)
         {
             if (data.UploadFile == null)
             {
