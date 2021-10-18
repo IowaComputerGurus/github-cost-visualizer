@@ -1,0 +1,27 @@
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: unset;
+    border: 0px solid #111111;
+    background-color: unset;
+    background: unset;
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #585858), color-stop(100%, #111));
+    background: -webkit-linear-gradient(top, #585858 0%, #111 100%);
+    background: -moz-linear-gradient(top, #585858 0%, #111 100%);
+    background: -ms-linear-gradient(top, #585858 0%, #111 100%);
+    background: -o-linear-gradient(top, #585858 0%, #111 100%);
+    background: linear-gradient(to bottom, #585858 0%, #111 100%);*/
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: unset;
+    display: unset;
+    min-width: unset;
+    padding: unset;
+    margin-left: unset;
+    text-align: unset;
+    text-decoration: none !important;
+    cursor: pointer;
+    *cursor: hand;
+    color: #333333 !important;
+    border: 0px solid transparent;
+    border-radius: 0px;
+}

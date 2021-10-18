@@ -1,0 +1,349 @@
+//
+// Forms
+// --------------------------------------------------
+
+$font-size-small:($base-font-size * .75);
+$font-size-large:($base-font-size * 1.25);
+
+$line-height-small:($base-line-height * .75);
+$line-height-large:($base-line-height * 1.25);
+
+$padding-base-vertical:4px;
+$padding-small-vertical:4px;
+$padding-large-vertical:4px;
+
+$padding-base-horizontal:8px;
+$padding-small-horizontal:8px;
+$padding-large-horizontal:8px;
+
+$input-height-base:24px;
+$input-height-small:20px;
+$input-height-large:30px;
+
+$form-help-block-arrow-width:12px;
+$border-radius-base:4px;
+$text-color:$dark-shade;
+
+$form-bordered-border-color:$dark-shade;
+$zindex-form-loading:50;
+$form-loading-spinner-size:32px;
+
+$dimmer-bg:rgba(0,0,0,0.5);
+$dimmer-bg-inverted:rgba(255,255,255,0.5);
+$dimmer-spinner-color:$main-shade;
+$dimmer-spinner-color-inverted:$main-shade;
+$dimmer-spinner-bg:$dark-shade;
+$dimmer-spinner-bg-inverted:$light-shade;
+
+.form-control {
+  box-shadow: none !important;
+}
+
+// Color input
+.form-control[type="color"] {
+  height: ($base-line-height * $base-font-size) + $padding-base-vertical * 2 + 2px;
+  padding: ($padding-base-vertical / 2) ($padding-base-horizontal / 2);
+}
+
+// Select box
+select {
+  &.form-control {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: $input-height-base - 2px;
+  }
+
+  &.input-sm { line-height: $input-height-small - 2px; }
+  &.input-lg { line-height: $input-height-large - 2px; }
+}
+
+
+// Elements
+legend {
+  padding-bottom: 7px;
+  color: #666;
+  font-size: ($base-font-size * 1.3);
+}
+
+label,
+optgroup {
+  font-weight: 600;
+  display:block;
+}
+
+label.required:after {
+  margin-left: 2px;
+  content: "*";
+  color: red;
+}
+
+.form-control-feedback {
+  text-decoration: none !important;
+  pointer-events: auto;
+  color: $text-color;
+  &:hover,
+  &:focus {
+    color: $text-color;
+  }
+}
+
+// Sizes
+.input-sm[type="color"] {
+  height: ($line-height-small * $font-size-small) + $padding-small-vertical * 2 + 2px;
+  padding: ($padding-small-vertical / 2) ($padding-small-horizontal / 2);
+}
+.input-lg[type="color"] {
+  height: ($line-height-large * $font-size-large) + $padding-large-vertical * 2 + 2px;
+  padding: ($padding-large-vertical / 2) ($padding-large-horizontal / 2);
+}
+
+
+// Form states
+.form-message {
+  display: none;
+  padding-top: 3px;
+  .has-success &,
+  .has-warning &,
+  .has-error & {
+    display: block;
+  }
+}
+
+.form-message.light,
+.form-message.dark,
+.form-message-light .form-message,
+.form-message-dark .form-message {
+  position: relative;
+  margin-top: 2px;
+  padding: 3px $padding-base-horizontal;
+  border: 1px solid;
+  border-radius: $border-radius-base;
+  background-size: 20px 20px !important;
+
+  &:before,
+  &:after {
+    position: absolute;
+    content: "";
+    border: none;
+    border-right-style: solid;
+    border-right-color: transparent;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-left-color: transparent;
+  }
+
+  &:before {
+    top: -($form-help-block-arrow-width / 2);
+    left: $padding-base-horizontal;
+    border-right-width: ($form-help-block-arrow-width / 2);
+    border-bottom-width: ($form-help-block-arrow-width / 2);
+    border-bottom-color: inherit;
+    border-left-width: ($form-help-block-arrow-width / 2);
+  }
+
+  &:after{
+    top: -($form-help-block-arrow-width / 2) + 1px;
+    left: $padding-base-horizontal + 1px;
+    border-right-width: ($form-help-block-arrow-width / 2) - 1px;
+    border-bottom-width: ($form-help-block-arrow-width / 2) - 1px;
+    border-left-width: ($form-help-block-arrow-width / 2) - 1px;
+  }
+}
+
+.has-success .control-label,
+.has-warning .control-label,
+.has-error .control-label {
+  color: $text-color;
+}
+  
+// State icons
+.form-control-success,
+.form-control-warning,
+.form-control-error {
+  $input-height: ($base-font-size * $base-line-height) + ($padding-base-vertical * 2);
+
+  padding-right: $padding-base-horizontal * 3;
+
+  background-repeat: no-repeat;
+  background-position: center right ($input-height * .25);
+  background-size: ($input-height * .5) ($input-height * .50);
+}
+
+//.has-success .form-control-success { background-image: $icon-success; }
+//.has-warning .form-control-warning { background-image: $icon-warning; }
+//.has-error .form-control-error { background-image: $icon-danger; }
+
+
+// Horizontal bordered form
+.form-bordered .form-group {
+  margin-right: 0;
+  margin-left: 0;
+  padding-top: $form-group-margin-bottom;
+
+  + .form-group {
+    padding-top: $form-group-margin-bottom;
+
+    border-top: 1px solid $form-bordered-border-color;
+  }
+}
+
+
+// Loading state
+.form-loading {
+  position: relative;
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+
+  &:before {
+    position: absolute;
+    z-index: $zindex-form-loading;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    content: '';
+    background: $dimmer-bg;
+  }
+
+  &:after {
+    position: absolute;
+    z-index: $zindex-form-loading + 1;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: $form-loading-spinner-size;
+    height: $form-loading-spinner-size;
+    margin: (-$form-loading-spinner-size/2) 0 0 (-$form-loading-spinner-size/2);
+    content: '';
+    animation: form-spin .6s linear;
+    animation-iteration-count: infinite;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $dimmer-spinner-color $dimmer-spinner-bg $dimmer-spinner-bg;
+    border-radius: 999px;
+  }
+
+  &.form-loading-inverted {
+    &:before { background: $dimmer-bg-inverted; }
+    &:after { border-color: $dimmer-spinner-color-inverted $dimmer-spinner-bg-inverted $dimmer-spinner-bg-inverted; }
+  }
+}
+
+.modal-dialog .form-loading {
+  &:before { z-index: $zindex-modal + $zindex-form-loading; }
+  &:after { z-index: $zindex-modal + $zindex-form-loading + 1; }
+}
+
+.custom-file {
+  input {
+    z-index:unset;
+  }
+  input:not(:disabled) {
+    &:hover ~ label {
+      cursor:pointer;
+      border-color:$main-shade;
+    }
+  }
+  label {
+    margin-bottom:0;
+    &:after {
+      border-color:$gray-400;
+    }
+  }
+  input:disabled ~ label {
+    cursor:not-allowed;
+  }
+}
+
+
+// Custom Radio and Checkbox
+.form-radio-custom, .form-check-custom {
+  position:relative;
+  label {
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    margin-bottom:.5rem;
+    &:active:before {
+      background:lighten($primary, 25%) !important;
+      border-color:lighten($primary, 25%) !important;
+    }
+    &:before {
+      content:'';
+      display:block;
+      width:18px;
+      height:18px;
+      margin-right:.5rem;
+      background:$white;
+      border:1px solid $gray-500;
+    }
+  }
+  input {
+    visibility:hidden;
+    position:absolute;
+    margin:0;
+    height:21px;
+    width:100%;
+    &:hover + label:before {
+      border-color:$primary;
+    }
+    &:checked + label {
+      &:before {
+        border-color:$primary;
+        background-color:$primary;
+      }
+      &:after {
+        content:'';
+        display:block;
+        position:absolute;
+      }
+    }
+    &:disabled {
+      &:checked + label:before {
+        border-color:lighten($primary, 25%);
+        background:lighten($primary, 25%);
+      }
+      + label:before {
+        border:1px solid $gray-400;
+      }
+      ~ label {
+        cursor:not-allowed;
+      }
+    }
+  }
+}
+
+// Custom Radio
+.form-radio-custom {
+  input:checked + label:after {
+    left:5px;
+    width:8px;
+    height:8px;
+    background:$white;
+    border-radius:50%;
+  }
+  label:before {
+    border-radius:50%;
+  }
+}
+
+// Custom Checkbox
+.form-check-custom {
+  input:checked + label:after {
+    z-index:0;
+    left:6px;
+    margin-top:-2px;
+    width:6px;
+    height:10px;
+    border:2px solid transparent;
+    border-right-color:$white;
+    border-bottom-color:$white;
+    transform:rotate(45deg);
+  }
+  label:before {
+    border-radius:2px;
+  }
+}
+  

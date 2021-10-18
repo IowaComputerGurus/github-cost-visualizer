@@ -1,0 +1,81 @@
+/* Bootstrap Overrides */
+
+// Bootstrap colors
+$bs-colors: (
+  'primary':#2a94db, //WFI #312762
+  'secondary':#c67700, //WFI #d63d36
+  'info':#17a2b8,
+  'success':#28a745,
+  'success-warning':#94b426,
+  'warning':#ffc107,
+  'warning-danger':#ee7b26,
+  'danger':#dc3545,
+  'light':#f8f9fa,
+  'dark':#343a40
+);
+
+$primary:map-get($bs-colors, 'primary');
+$secondary:map-get($bs-colors, 'secondary');
+$info:map-get($bs-colors, 'info');
+$success:map-get($bs-colors, 'success');
+$success-warning:map-get($bs-colors, 'success-warning');
+$warning:map-get($bs-colors, 'warning');
+$warning-danger:map-get($bs-colors, 'warning-danger');
+$danger:map-get($bs-colors, 'danger');
+$light:map-get($bs-colors, 'light');
+$dark:map-get($bs-colors, 'dark');
+
+// Grid breakpoints (changed to relative units to fix cross-platform inconsistencies)
+$grid-breakpoints: (
+  xs: 0,
+  sm: 36rem, //576px
+  md: 48rem, //768px
+  lg: 62rem, //992px
+  xl: 75rem, //1200px
+  xll: 87.5rem //1400px
+);
+
+// Grid containers (changed to relative units to fix cross-platform inconsistencies)
+$container-max-widths: (
+  sm: 33.75rem, //540
+  md: 45rem, //720
+  lg: 60rem, //960
+  xl: 71.25rem, //1140
+  xll: 83.75rem //1340
+);
+
+// Override Bootstrap spacers for more options
+$spacer:1rem;
+$spacers: (
+    0: 0,
+    1: $spacer,
+    2: ($spacer * 2),
+    3: ($spacer * 3),
+    4: ($spacer * 4),
+    5: ($spacer * 5),
+    6: ($spacer * 6),
+    7: ($spacer * 7),
+    8: ($spacer * 8)
+);
+
+// Get rid of deprecated warnings
+$enable-deprecation-messages: false;
+
+// Change gutter width
+$grid-gutter-width: 22px !default;
+
+// Form Control changes
+$input-height:2rem;
+$input-color:#444;
+$input-font-size:13;
+$input-border-radius:2px;
+$input-padding-y:.25rem;
+$input-padding-x:.75rem;
+
+$form-check-input-margin-y:3px;
+
+$custom-file-height-inner:unset;
+$custom-file-line-height:1.61539;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+// $yiq-contrasted-threshold:  195 !default;

@@ -1,0 +1,96 @@
+.modal {
+    .modal-title {
+        margin:0;
+    }
+    .modal-content {
+        p:last-child {
+            margin:0;
+        }
+    }
+    .modal-loading {
+        position:absolute;
+        top:0;
+        right:0;
+        bottom:0;
+        left:0;
+        margin:0;
+        max-width:100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    @each $color, $value in $bs-colors {
+        &.modal-#{$color} {
+            border-color:lighten($value, 30%);
+            .modal-header {
+                color:darken($value, 10%);
+                background:lighten($value, 40%);
+                border-color:lighten($value, 30%);
+            }
+            &.modal-darker .modal-content {
+                border-color:darken($value, 5%);
+                .modal-header {
+                    background:darken($value, 5%);
+                    color:$white;
+                    button {
+                        color:$white;
+                    }
+                }
+            }
+            &.modal-full {
+                .modal-content {
+                    color:darken($value, 10%);
+                    background:lighten($value, 40%);
+                }
+                .modal-footer {
+                    border-color:lighten($value, 30%);
+                }
+                &.modal-darker .modal-content {
+                    color:$white;
+                    background:darken($value, 5%);
+                    border-color:darken($value, 5%);
+                    .modal-header {
+                        border-color:rgba(255,255,255,0.5);
+                    }
+                }
+            }
+        }       
+    }
+    @each $color, $value in $cs-current {
+        &.modal-#{$color} {
+            border-color:lighten($value, 30%);
+            .modal-header {
+                color:darken($value, 10%);
+                background:lighten($value, 40%);
+                border-color:lighten($value, 30%);
+            }
+            &.modal-darker .modal-content {
+                border-color:darken($value, 5%);
+                .modal-header {
+                    background:darken($value, 5%);
+                    color:$white;
+                    button {
+                        color:$white;
+                    }
+                }
+            }
+            &.modal-full {
+                .modal-content {
+                    color:darken($value, 10%);
+                    background:lighten($value, 40%);
+                }
+                .modal-footer {
+                    border-color:lighten($value, 30%);
+                }
+                &.modal-darker .modal-content {
+                    color:$white;
+                    background:darken($value, 5%);
+                    border-color:darken($value, 5%);
+                    .modal-header {
+                        border-color:rgba(255,255,255,0.5);
+                    }
+                }
+            }
+        }       
+    }
+}

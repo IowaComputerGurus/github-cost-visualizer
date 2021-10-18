@@ -1,0 +1,34 @@
+﻿@model UsageReportViewModel
+
+@{
+    var title = $"Github Usage Visualizer Report ({Model.StartDate.ToShortDateString()} to {Model.EndDate.ToShortDateString()})";
+    ViewData["Header-Icon"] = "fa-tachometer-alt";
+    ViewData["Header-Title"] = title;
+    ViewData["Title"] = title;
+}
+
+
+<partial name="_SummaryItems" model="Model"/>
+
+<div class="row">
+    <div class="col-md-6">
+        <partial name="_ActionDetail" model="Model" />
+    </div>
+    <div class="col-md-6">
+        <partial name="_StorageDetail" model="Model" />
+    </div>
+</div>
+
+<div class="alert alert-warning my-1">
+    <strong>NOTE: </strong> Information provided on this report is a raw extract and does not include any provision for "included minutes" at any Github tier.
+</div>
+
+
+
+@section scripts{
+    <script>
+        $('.display').DataTable({
+            responsive: true
+        })
+    </script>
+}

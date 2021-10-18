@@ -1,0 +1,44 @@
+@each $color, $value in $bs-colors {
+    .badge-status-#{$color} {
+        color: $white;
+        background: darken($value, 5%);
+        border-radius: 20px;
+        padding: 0.1rem 0.75rem 0.15rem 0.35rem;
+        margin: 1rem 1rem 0 0;
+        letter-spacing: 0.05em;
+        display: block; 
+        &:before {
+            color: $white;
+            content: '\f05a'; // info i icon
+            font-family: "Font Awesome 5 Free";
+            margin-right: 0.25rem;
+        }      
+    }    
+}
+
+.badge-status-success, .badge-status-success-warning {
+    &:before {
+        content: '\f058'; // checkmark icon
+    }      
+}
+
+.badge-status-danger, .badge-status-warning-danger, .badge-status-warning {
+    &:before {
+        content: '\f057'; // x icon
+    }      
+}  
+
+.badge-status {
+    color:$black;
+    background:darken($light-shade, 3%);
+    border-radius: 20px;
+    padding: 0.1rem 0.75rem 0.15rem 0.35rem;
+    margin: 1rem 1rem 0 0;
+    letter-spacing: 0.05em;
+    display: block;
+    &:before {
+        content: '\f05a'; // info i icon
+        font-family: "Font Awesome 5 Free";
+        margin-right: 0.25rem;
+    }     
+}    

@@ -1,0 +1,36 @@
+.icon-list {
+    li {
+        margin-bottom:.25rem;
+    }
+    i {
+        min-width:24px;
+        text-align:center;
+        margin-right:.35rem;
+    }
+}
+
+.list-group {
+    h4 {
+        @include font-size(14);
+        font-weight:600;
+        margin:0;
+        line-height:1.5;
+    }
+    .list-column {
+        padding-right:0;
+    }
+    .list-column *:last-child {
+        margin-bottom:1rem;
+    }
+    /*.list-column * + * {
+        margin-top:1rem;
+    }*/
+    @include mq-min-width(768) {
+        .list-column {
+            padding-right:1rem;
+            *:last-child {
+                margin-bottom:0;
+            }
+        }
+    }
+}

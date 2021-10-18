@@ -1,0 +1,34 @@
+﻿@model UsageReportViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="stat-box card card-primary card-darker card-full">
+            <div class="card-header d-block">
+                <div class="row align-items-center justify-content-between flex-nowrap">
+                    <div class="col-auto">
+                        <span class="display-5">@Model.TotalActionMinutesUsed</span>
+                        <h5>Total Action Minutes</h5>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-stopwatch"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stat-box card card-primary card-darker card-full">
+            <div class="card-header d-block">
+                <div class="row align-items-center justify-content-between flex-nowrap">
+                    <div class="col-auto">
+                        <span class="display-5">@Model.AverageDailyStorage.ToString("F2") gb</span>
+                        <h5>Average Daily Storage</h5>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-hdd"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

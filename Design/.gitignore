@@ -1,0 +1,7 @@
+node_modules/
+build/
+wwwroot/
+newProject/
+_newProject/
+_updateProject/
+.vs/

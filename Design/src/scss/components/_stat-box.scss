@@ -1,0 +1,7 @@
+.stat-box {
+    .card-header {
+        i {
+            @include font-size(64);
+        }
+    }
+}

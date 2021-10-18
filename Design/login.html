@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+  <title>Dashboard - ICG Admin: Responsive Bootstrap Template</title>
+
+  <!-- Stylesheets -->
+  <link href="/wwwroot/css/gijgo.min.css" rel="stylesheet" type="text/css">
+  <link href="/wwwroot/css/select2.min.css" rel="stylesheet" type="text/css">
+  <link href="/wwwroot/css/style.min.css" rel="stylesheet" type="text/css">
+  <link href="/wwwroot/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Javascript -->
+  <script type="text/javascript" src="/wwwroot/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/additional-methods.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/jquery.validate.unobtrusive.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/gijgo.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/highlight.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/select2.min.js"></script>
+  <script type="text/javascript" src="/wwwroot/js/scripts.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid login">
+        <div class="row justify-content-center">
+            <div class='col-md-4 bg-white p-0'>
+                <div class="p-2 text-center">
+                    <img class="img-fluid mb-1" src="/wwwroot/images/iowa-computer-gurus.png" />
+                </div>
+                <div class="bg-main-accent p-2 d-flex justify-content-center">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <div class="text-white text-center mb-1">
+                            <a href="index.html" class="text-white"><h4 class="mt-0">Company Name</h4></a>
+                            <span class="h6">User/Branch/Product Database</span>
+                        </div>
+                        <ul class="list-unstyled text-white mb-0 icon-list">
+                            <li><i class="fas fa-sitemap"></i> User Management</li>
+                            <li><i class="fas fa-file-alt"></i> Document Management</li>
+                            <li><i class="fas fa-outdent"></i> Content Curation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-2 controls">
+                    <form method="post" id="page-signin-form" action="/Account/Login?returnurl=%2F" novalidate="novalidate">
+                        <h5 class="mt-0">Sign In to your Account</h5>
+                        <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
+                            <ul>
+                                <li style="display:none"></li>
+                            </ul>
+                        </div>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="username"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username or Email" aria-label="Username" aria-describedby="username">
+                        </div>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="password"><i class="fas fa-asterisk"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password" data-val="true" data-val-regex="Passwords must be 8 characters with upper &amp; lower letters and a number" data-val-regex-pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$" data-val-required="The Password field is required." id="Password" name="Password">
+                        </div>
+                        <div class="form-check mb-1">
+                            <input class="form-check-input" type="checkbox" id="remember">
+                            <label class="form-check-label" for="remember">Remember Me</label>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-lg btn-main-accent">Sign In</button>
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8O2VlHv2wqBJjVR1UGCWjEjGhw59mc-tH0s7mXbbxQoHzv7NRzJMp7HrquGhDd3eBQbikHr9FZBrJZU58oz-9Ki0QwiCqyqoHBhACjNDPw8c0-tryw4bD1l4c8eO1LuGs28xYGFVbn-5cAGji522jVk"><input name="RememberMe" type="hidden" value="false">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
