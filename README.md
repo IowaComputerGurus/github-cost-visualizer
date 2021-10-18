@@ -8,7 +8,7 @@ Are you unsure of what portions of your GitHub organization are using the most r
 
 By simply uploading a Generated Github usage report you can see your data in an easy-to-digest manner
 
-![Sample Report](https://github.com/IowaComputerGurus/github-cost-visualizer/tree/main/.github/report-sample.png)
+![Sample Report](https://github.com/IowaComputerGurus/github-cost-visualizer/blob/main/.github/report-sample.png)
 
 ### Action Minute Reporting
 
