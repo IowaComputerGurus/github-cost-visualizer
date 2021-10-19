@@ -32,4 +32,4 @@ Storage usage reporting on GitHub is somewhat complicated, so to try and provide
 
 ## Open-Source & Free to Use
 
-[IowaComputerGurus, Inc](https://www.iowacomputergurus.com) is providing the source for this, as well as the hosting/running version that can be found on [GithubCostVisualizer.com](https://www.githubcostvisualizer.com) at not cost to users.  If you find this tool helpful, please contribute or sponsor to help us continue to drive this project forward.
+[IowaComputerGurus, Inc](https://www.iowacomputergurus.com) is providing the source for this, as well as the live hosted version that can be found on [GithubCostVisualizer.com](https://www.githubcostvisualizer.com) at no cost to users.  If you find this tool helpful, please contribute or sponsor to help us continue to drive this project forward.
