@@ -36,6 +36,9 @@ namespace GitHubCostVisualizer.Web.Processor
                     into grp
                                          select new KeyValuePair<DateTime, decimal>(grp.Key, grp.Sum(i => i.Quantity)))
                 .ToList();
+
+            model.DailyStorageByRepo = GenerateStorageByDays(entries);
+
             if (model.DailyStorageSummary.Count > 0)
             {
                 model.AverageDailyStorage =
@@ -43,12 +46,40 @@ namespace GitHubCostVisualizer.Web.Processor
 
                 var totalDays = model.DailyStorageSummary.Count();
                 model.AverageDailyStorageByRepo = (from x in entries.Where(i => i.Product == Constants.GitHubProducts.SharedStorage)
-                    group x by x.Repository
+                                                   group x by x.Repository
                     into grp
-                    select new KeyValuePair<string, decimal>(grp.Key, grp.Sum(i => i.Quantity) / grp.Count())).ToList();
+                                                   select new KeyValuePair<string, decimal>(grp.Key, grp.Sum(i => i.Quantity) / grp.Count())).ToList();
             }
 
             return model;
+        }
+
+        private DailyStorageData GenerateStorageByDays(List<GithubUsageEntry> entries)
+        {
+            var storage = entries.Where(e => e.Product == Constants.GitHubProducts.SharedStorage).ToList();
+            var startDate = storage.Min(r => r.Date);
+            var endDate = storage.Max(r => r.Date);
+
+            var repos = storage.Select(r => r.Repository).Distinct().OrderBy(r => r);
+            var dayList = Enumerable.Range(0, 1 + endDate.Subtract(startDate).Days).Select(o => startDate.AddDays(o)).ToList();
+
+            var q = from r in repos
+                    from d in dayList
+                    join s in storage on new { r, d } equals new { r = s.Repository, d = s.Date } into byDay
+                    from bd in byDay.DefaultIfEmpty()
+                    select new { Repo = r, Date = d, Quantity = bd?.Quantity ?? 0 };
+
+            var results = q.GroupBy(k => k.Repo)
+                .OrderBy(g => g.Key)
+                .Select(g => new DailyStorageDataSet { Label = g.Key, Data = g.OrderBy(r => r.Date).Select(r => r.Quantity).ToList() });
+            //.Select(r=>new KeyValuePair<DateTime, decimal>(r.Date, r.Quantity)).ToArray());
+            //results.Dump();
+
+            return new DailyStorageData
+            {
+                Labels = dayList.Select(d=>d.ToShortDateString()).ToList(),
+                DataSets = results.ToList()
+            };
         }
     }
 }
