@@ -1,4 +1,5 @@
-﻿@model UsageReportViewModel
+﻿@using System.Text.Json
+@model UsageReportViewModel
 
 
 <div class="card">
@@ -25,6 +26,15 @@
                    aria-selected="False">
                     Chart
                 </a>
+                <a class="nav-item nav-link"
+                   id="nav-tab-storage-repository-daily-chart-tab"
+                   data-toggle="tab"
+                   href="#nav-tab-storage-repository-daily-chart"
+                   role="tab"
+                   aria-controls="nav-tab-storage-repository-chart"
+                   aria-selected="False">
+                    Chart By Day
+                </a>
             </div>
         </nav>
         <div class="tab-content">
@@ -50,33 +60,86 @@
             <div class="tab-pane fade" id="nav-tab-storage-repository-chart" role="tabpanel" aria-labelledby="nav-tab-storage-repository-chart-tab">
                 <canvas id="action-storage-by-repository-chart" width="300" height="250"></canvas>
                 <script>
-                            var actionStorageChartContext = $('#action-storage-by-repository-chart');
-                            var actionStorageChart = new Chart(actionStorageChartContext,
-                                {
-                                    type: 'pie',
-                                    data: {
-                                        datasets: [
-                                            {
-                                                data: [@Html.Raw(string.Join(", ", Model.AverageDailyStorageByRepo.Select(s => s.Value)))],
-                                                backgroundColor: getColors(@Model.AverageDailyStorageByRepo.Count, 'primary', 'dark', 'secondary', 'light')
-                                            }
-                                        ],
-                                        labels: [@Html.Raw(String.Join(", ", Model.AverageDailyStorageByRepo.Select(m => $"'{m.Key}'")))]
-                                    },
-                                    options: {
-                                        tooltips: {
-                                            enabled: true,
-                                            callbacks: {
-                                                label: function(tooltipItem, data) {
-                                                    var label = data.labels[tooltipItem.index];
-                                                    var val = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                                    return label + ':' + val + ' (' + (100 * val / @Html.Raw(Model.AverageDailyStorageByRepo.Sum(d => d.Value))).toFixed(2) + '%)';
-                                                }
-                                            }
-
+                    var actionStorageChartContext = $('#action-storage-by-repository-chart');
+                    var actionStorageChart = new Chart(actionStorageChartContext,
+                        {
+                            type: 'pie',
+                            data: {
+                                datasets: [
+                                    {
+                                        data: [@Html.Raw(string.Join(", ", Model.AverageDailyStorageByRepo.Select(s => s.Value)))],
+                                        backgroundColor: getColors(@Model.AverageDailyStorageByRepo.Count, 'primary', 'dark', 'secondary', 'light')
+                                    }
+                                ],
+                                labels: [@Html.Raw(String.Join(", ", Model.AverageDailyStorageByRepo.Select(m => $"'{m.Key}'")))]
+                            },
+                            options: {
+                                tooltips: {
+                                    enabled: true,
+                                    callbacks: {
+                                        label: function(tooltipItem, data) {
+                                            var label = data.labels[tooltipItem.index];
+                                            var val = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                            return label + ':' + val + ' (' + (100 * val / @Html.Raw(Model.AverageDailyStorageByRepo.Sum(d => d.Value))).toFixed(2) + '%)';
                                         }
                                     }
-                                });
+
+                                }
+                            }
+                        });
+                </script>
+            </div>
+            <div class="tab-pane fade" id="nav-tab-storage-repository-daily-chart" role="tabpanel" aria-labelledby="nav-tab-storage-repository-daily-chart-tab">
+                <canvas id="action-storage-by-repository-daily-chart" width="300" height="250"></canvas>
+                <script>
+                    var allData = @Html.Raw(JsonSerializer.Serialize(Model.DailyStorageByRepo));
+                    var colors = getColors(allData.datasets.length, 'primary', 'dark', 'secondary', 'light');
+
+                    var ds = allData.datasets.map(function(e, i) {
+                        return {
+                            fill: false,
+                            label: e.label,
+                            data: e.data,
+                            borderColor: colors[i]
+                        }
+                    });
+                    allData.datasets = ds;
+                    var actionStorageByDayChartContext = $('#action-storage-by-repository-daily-chart');
+                    var actionStorageByDayChart = new Chart(actionStorageByDayChartContext,
+                        {
+                            type: 'line',
+                            data: allData,
+                            
+                            options: {
+                                scales: {
+                                    x: {
+                                        type: "time",
+                                        display: true,
+                                        time: { unit: "day" }
+                                    },
+                                    y: {
+                                        title: { display: true, text: "Storage"},
+                                        ticks: {
+                                            callback: function(val, index) {
+                                                console.log(val, index);
+                                                return val + "GB";
+                                            }
+                                        }
+                                    }
+                                },
+                                tooltips: {
+                                    enabled: true,
+                                    callbacks: {
+                                        label: function(tooltipItem, data) {
+                                            var label = data.datasets[tooltipItem.datasetIndex].label;
+                                            var val = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                            return label + ':' + val + "GB";
+                                        }
+                                    }
+
+                                }
+                            }
+                        });
                 </script>
             </div>
         </div>
