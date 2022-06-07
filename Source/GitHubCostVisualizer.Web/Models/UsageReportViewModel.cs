@@ -27,6 +27,8 @@ namespace GitHubCostVisualizer.Web.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int TotalActionMinutesUsed { get; set; }
+        public int TotalBillableActionMinutes { get; set; }
+        public decimal TotalActionMinutesCost { get; set; }
         public List<KeyValuePair<string, int>> ActionsSummary { get; set; }
         public List<KeyValuePair<string, int>> ActionMinutesByRepository { get; set; }
         public decimal AverageDailyStorage { get; set; }
