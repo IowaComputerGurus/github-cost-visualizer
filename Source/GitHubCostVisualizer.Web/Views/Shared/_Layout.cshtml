@@ -36,7 +36,22 @@
     @await RenderSectionAsync("Header", false)
 </head>
 <body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G25TVL4TTW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
+        gtag('config', 'G-G25TVL4TTW');
+        
+        function trackUpload() {
+            gtag('event', 'upload', {
+                'event_category': 'upload',
+                'event_label': 'upload'
+            });
+        }
+    </script>
     <nav class="navbar icg-navbar bg-white row m-0">
         <div class="navbar-header">
 
