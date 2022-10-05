@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Transactions;
 using GitHubCostVisualizer.Web.Models;
 
 namespace GitHubCostVisualizer.Web.Processor
@@ -26,7 +24,7 @@ namespace GitHubCostVisualizer.Web.Processor
                 .Sum(i => (int)(i.Quantity * i.Multiplier));
             model.TotalActionMinutesCost = entries
                 .Where(i => i.Product.Equals(Constants.GitHubProducts.Actions, StringComparison.InvariantCultureIgnoreCase))
-                .Sum(i => i.Quantity * i.Multiplier * i.PricePer);
+                .Sum(i => i.Quantity.GetValueOrDefault() * i.Multiplier.GetValueOrDefault() * i.PricePer.GetValueOrDefault());
             model.ActionsSummary = (from x in entries.Where(i => i.Product.Equals(Constants.GitHubProducts.Actions, StringComparison.InvariantCultureIgnoreCase))
                                     group x by x.Sku
                     into grp
@@ -40,7 +38,7 @@ namespace GitHubCostVisualizer.Web.Processor
             model.DailyStorageSummary = (from x in entries.Where(i => i.Product.Equals(Constants.GitHubProducts.SharedStorage, StringComparison.InvariantCultureIgnoreCase))
                                          group x by x.Date
                     into grp
-                                         select new KeyValuePair<DateTime, decimal>(grp.Key, grp.Sum(i => i.Quantity)))
+                                         select new KeyValuePair<DateTime, decimal>(grp.Key, grp.Sum(i => i.Quantity.GetValueOrDefault())))
                 .ToList();
 
             model.DailyStorageByRepo = GenerateStorageByDays(entries);
@@ -54,7 +52,7 @@ namespace GitHubCostVisualizer.Web.Processor
                 model.AverageDailyStorageByRepo = (from x in entries.Where(i => i.Product.Equals(Constants.GitHubProducts.SharedStorage, StringComparison.InvariantCultureIgnoreCase))
                                                    group x by x.Repository
                     into grp
-                                                   select new KeyValuePair<string, decimal>(grp.Key, grp.Sum(i => i.Quantity) / grp.Count())).ToList();
+                                                   select new KeyValuePair<string, decimal>(grp.Key, grp.Sum(i => i.Quantity.GetValueOrDefault()) / grp.Count())).ToList();
             }
 
             return model;
