@@ -14,13 +14,13 @@ namespace GitHubCostVisualizer.Web.Models
         [Name("SKU")]
         public string Sku { get; set; }
         [Name("Quantity")]
-        public decimal Quantity { get; set; }
+        public decimal? Quantity { get; set; }
         [Name("Unit Type")]
         public string UnitType { get; set; }
         [Name("Price Per Unit ($)")]
-        public decimal PricePer { get; set; }
+        public decimal? PricePer { get; set; }
         [Name("Multiplier")]
-        public decimal Multiplier { get; set; }
+        public decimal? Multiplier { get; set; }
         [Name("Actions Workflow")]
         public string ActionWorkflow { get; set; }
         [Name("Username")]
