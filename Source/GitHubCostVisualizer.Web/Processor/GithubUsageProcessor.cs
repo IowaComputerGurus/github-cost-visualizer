@@ -54,6 +54,12 @@ namespace GitHubCostVisualizer.Web.Processor
                     into grp
                                                    select new KeyValuePair<string, decimal>(grp.Key, grp.Sum(i => i.Quantity.GetValueOrDefault()) / grp.Count())).ToList();
             }
+            else
+            {
+                //Default values
+                model.AverageDailyStorage = 0m;
+                model.AverageDailyStorageByRepo = new List<KeyValuePair<string, decimal>>();
+            }
 
             return model;
         }
@@ -61,6 +67,9 @@ namespace GitHubCostVisualizer.Web.Processor
         private DailyStorageData GenerateStorageByDays(List<GithubUsageEntry> entries)
         {
             var storage = entries.Where(e => e.Product.Equals(Constants.GitHubProducts.SharedStorage, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            if(!storage.Any())
+                return new DailyStorageData();
+            
             var startDate = storage.Min(r => r.Date);
             var endDate = storage.Max(r => r.Date);
 
