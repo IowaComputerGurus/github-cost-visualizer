@@ -27,5 +27,6 @@ namespace GitHubCostVisualizer.Web.Models
         public string Username { get; set; }
         [Name("Notes")]
         public string Notes { get; set; }
+        public string TrimmedWorkflow => ActionWorkflow?.Replace(".github/workflows/", "");
     }
 }

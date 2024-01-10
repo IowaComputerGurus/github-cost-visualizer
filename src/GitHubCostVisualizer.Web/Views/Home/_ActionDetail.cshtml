@@ -26,6 +26,14 @@
                    aria-selected="False">
                     Chart (By Repo)
                 </a>
+                <a class="nav-item nav-link" id="nav-tab-action-workflow-list-tab"
+                   data-toggle="tab"
+                   href="#nav-tab-action-workflow-list"
+                   role="tab"
+                   aria-controls="nav-tab-action-workflow-list"
+                   aria-selected="True">
+                    List (By Workflow)
+                </a>
                 <a class="nav-item nav-link"
                    id="nav-tab-action-system-list-tab"
                    data-toggle="tab"
@@ -97,6 +105,25 @@
                         }
                     });
                 </script>
+            </div>
+            <div class="tab-pane" id="nav-tab-action-workflow-list" role="tabpanel" aria-labelledby="nav-tab-action-workflow-list-tab">
+                <table class="display w-100">
+                    <thead>
+                    <tr>
+                        <th>Workflow (Repository - File)</th>
+                        <th>Minutes</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.ActionMinutesByWorkflow)
+                    {
+                        <tr>
+                            <td>@item.Key</td>
+                            <td data-sort="@item.Value">@item.Value minutes</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
             </div>
             <div class="tab-pane fade" id="nav-tab-action-system-list" role="tabpanel" aria-labelledby="nav-tab-action-system-list-tab">
                 <table class="display w-100">

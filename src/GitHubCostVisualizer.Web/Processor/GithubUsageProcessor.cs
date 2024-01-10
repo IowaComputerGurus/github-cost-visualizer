@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using GitHubCostVisualizer.Web.Models;
 
 namespace GitHubCostVisualizer.Web.Processor
@@ -34,7 +35,12 @@ namespace GitHubCostVisualizer.Web.Processor
                                                group x by x.Repository
             into grp
                                                select new KeyValuePair<string, int>(grp.Key, grp.Sum(i => (int)i.Quantity))).ToList();
-
+            model.ActionMinutesByWorkflow = (from x in entries.Where(i =>
+                    i.Product.Equals(Constants.GitHubProducts.Actions, StringComparison.InvariantCultureIgnoreCase))
+                group x by new { x.Repository, x.TrimmedWorkflow }
+                into grp
+                select new KeyValuePair<string, int>($"{grp.Key.Repository} - {grp.Key.TrimmedWorkflow}",
+                    grp.Sum(i => (int)i.Quantity))).ToList();
             model.DailyStorageSummary = (from x in entries.Where(i => i.Product.Equals(Constants.GitHubProducts.SharedStorage, StringComparison.InvariantCultureIgnoreCase))
                                          group x by x.Date
                     into grp
