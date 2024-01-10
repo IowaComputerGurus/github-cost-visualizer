@@ -43,6 +43,11 @@ namespace GitHubCostVisualizer.Web.Controllers
                 using (var csvData = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
                     var rawReport = csvData.GetRecords<GithubUsageEntry>().ToList();
+                    if (rawReport.Count == 0)
+                    {
+                        ModelState.AddModelError(nameof(data.UploadFile), "The uploaded file did not contain any records, please try with a different file.");
+                        return View(nameof(Index), data);
+                    }
                     var model = _processor.ProcessUsageReport(rawReport);
                     return View(model);
                 }
