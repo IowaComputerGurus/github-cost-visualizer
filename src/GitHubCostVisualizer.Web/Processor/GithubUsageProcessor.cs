@@ -31,16 +31,30 @@ namespace GitHubCostVisualizer.Web.Processor
                     into grp
                                     select new KeyValuePair<string, int>(grp.Key, grp.Sum(i => (int)i.Quantity)))
                 .ToList();
-            model.ActionMinutesByRepository = (from x in entries.Where(i => i.Product.Equals(Constants.GitHubProducts.Actions, StringComparison.InvariantCultureIgnoreCase))
+            model.ActionMinutesByRepository = (from x in entries.Where(i => 
+             i.Product.Equals(Constants.GitHubProducts.Actions, StringComparison.InvariantCultureIgnoreCase))
                                                group x by x.Repository
-            into grp
-                                               select new KeyValuePair<string, int>(grp.Key, grp.Sum(i => (int)i.Quantity))).ToList();
+                                               into grp
+                                               select new ActionMinutesItem
+                                               {
+                                                   Repository = grp.Key,
+                                                   Minutes = grp.Sum(i => (int)i.Quantity),
+                                                   TotalCost = grp.Sum(i => i.Quantity.GetValueOrDefault() * i.Multiplier.GetValueOrDefault() * i.PricePer.GetValueOrDefault())
+                                               }).ToList();
+
             model.ActionMinutesByWorkflow = (from x in entries.Where(i =>
-                    i.Product.Equals(Constants.GitHubProducts.Actions, StringComparison.InvariantCultureIgnoreCase))
-                group x by new { x.Repository, x.TrimmedWorkflow }
-                into grp
-                select new KeyValuePair<string, int>($"{grp.Key.Repository} - {grp.Key.TrimmedWorkflow}",
-                    grp.Sum(i => (int)i.Quantity))).ToList();
+             i.Product.Equals(Constants.GitHubProducts.Actions, StringComparison.InvariantCultureIgnoreCase))
+                                             group x by new { x.Repository, x.TrimmedWorkflow }
+                                             into grp
+                                             select new ActionMinutesItem
+                                             {
+                                                 Minutes = grp.Sum(i => (int)i.Quantity),
+                                                 Workflow = ($"{grp.Key.Repository} - {grp.Key.TrimmedWorkflow}").ToString(),
+                                                 TotalCost = grp.Sum(i => i.Quantity.GetValueOrDefault() * i.Multiplier.GetValueOrDefault() * i.PricePer.GetValueOrDefault())
+
+                                             }).ToList();
+
+
             model.DailyStorageSummary = (from x in entries.Where(i => i.Product.Equals(Constants.GitHubProducts.SharedStorage, StringComparison.InvariantCultureIgnoreCase))
                                          group x by x.Date
                     into grp
@@ -73,9 +87,9 @@ namespace GitHubCostVisualizer.Web.Processor
         private DailyStorageData GenerateStorageByDays(List<GithubUsageEntry> entries)
         {
             var storage = entries.Where(e => e.Product.Equals(Constants.GitHubProducts.SharedStorage, StringComparison.InvariantCultureIgnoreCase)).ToList();
-            if(!storage.Any())
+            if (!storage.Any())
                 return new DailyStorageData();
-            
+
             var startDate = storage.Min(r => r.Date);
             var endDate = storage.Max(r => r.Date);
 
@@ -94,7 +108,7 @@ namespace GitHubCostVisualizer.Web.Processor
 
             return new DailyStorageData
             {
-                Labels = dayList.Select(d=>d.ToShortDateString()).ToList(),
+                Labels = dayList.Select(d => d.ToShortDateString()).ToList(),
                 DataSets = results.ToList()
             };
         }

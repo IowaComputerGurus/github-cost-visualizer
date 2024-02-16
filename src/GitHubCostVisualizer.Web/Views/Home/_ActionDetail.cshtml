@@ -61,14 +61,16 @@
                         <tr>
                             <th>Repository</th>
                             <th>Minutes</th>
+                            <th>Estimated Cost</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.ActionMinutesByRepository)
                         {
                             <tr>
-                                <td>@item.Key</td>
-                                <td data-sort="@item.Value">@item.Value minutes</td>
+                                <td>@item.Repository</td>
+                                <td data-sort="@item.Minutes">@item.Minutes minutes</td>
+                                <td data-sort="@item.TotalCost">$@item.TotalCost</td>
                             </tr>
                         }
                     </tbody>
@@ -77,51 +79,53 @@
             <div class="tab-pane fade" id="nav-tab-action-repository-chart" role="tabpanel" aria-labelledby="nav-tab-action-repository-chart-tab">
                 <canvas id="action-minutes-by-repository-chart" width="300" height="250"></canvas>
                 <script>
-                var actionMinChartContext = $('#action-minutes-by-repository-chart');
-                var actionMinChart = new Chart(actionMinChartContext,
-                    {
-                        type: 'pie',
-                        data: {
-                            datasets: [
-                                {
-                                    data: [@Html.Raw(string.Join(", ", Model.ActionMinutesByRepository.Select(s => s.Value)))],
-                                    backgroundColor: getColors(@Model.ActionMinutesByRepository.Count, 'primary', 'dark', 'secondary', 'light')
-                                }
-                            ],
-                            labels: [@Html.Raw(String.Join(", ", Model.ActionMinutesByRepository.Select(m => $"'{m.Key}'")))]
-                        },
-                        options: {
-                            tooltips: {
-                                enabled: true,
-                                callbacks: {
-                                    label: function(tooltipItem, data) {
-                                        var label = data.labels[tooltipItem.index];
-                                        var val = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                        return label + ':' + val + ' (' + (100 * val / @Html.Raw(Model.ActionMinutesByRepository.Sum(d => d.Value))).toFixed(2) + '%)';
+                    var actionMinChartContext = $('#action-minutes-by-repository-chart');
+                    var actionMinChart = new Chart(actionMinChartContext,
+                        {
+                            type: 'pie',
+                            data: {
+                                datasets: [
+                                    {
+                                        data: [@Html.Raw(string.Join(", ", Model.ActionMinutesByRepository.Select(s => s.Minutes)))],
+                                        backgroundColor: getColors(@Model.ActionMinutesByRepository.Count, 'primary', 'dark', 'secondary', 'light')
                                     }
-                                }
+                                ],
+                                labels: [@Html.Raw(String.Join(", ", Model.ActionMinutesByRepository.Select(m => $"'{m.Repository}'")))]
+                            },
+                            options: {
+                                tooltips: {
+                                    enabled: true,
+                                    callbacks: {
+                                        label: function (tooltipItem, data) {
+                                            var label = data.labels[tooltipItem.index];
+                                            var val = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                            return label + ':' + val + ' (' + (100 * val / @Html.Raw(Model.ActionMinutesByRepository.Sum(d => d.Minutes))).toFixed(2) + '%)';
+                                        }
+                                    }
 
+                                }
                             }
-                        }
-                    });
+                        });
                 </script>
             </div>
             <div class="tab-pane" id="nav-tab-action-workflow-list" role="tabpanel" aria-labelledby="nav-tab-action-workflow-list-tab">
                 <table class="display w-100">
                     <thead>
-                    <tr>
-                        <th>Workflow (Repository - File)</th>
-                        <th>Minutes</th>
-                    </tr>
+                        <tr>
+                            <th>Workflow (Repository - File)</th>
+                            <th>Minutes</th>
+                            <th>Estimated Cost</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in Model.ActionMinutesByWorkflow)
-                    {
-                        <tr>
-                            <td>@item.Key</td>
-                            <td data-sort="@item.Value">@item.Value minutes</td>
-                        </tr>
-                    }
+                        @foreach (var item in Model.ActionMinutesByWorkflow)
+                        {
+                            <tr>
+                                <td>@item.Workflow</td>
+                                <td data-sort="@item.Minutes">@item.Minutes minutes</td>
+                                <td data-sort="@item.TotalCost">$@item.TotalCost</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -164,7 +168,7 @@
                                 tooltips: {
                                     enabled: true,
                                     callbacks: {
-                                        label: function(tooltipItem, data) {
+                                        label: function (tooltipItem, data) {
                                             var label = data.labels[tooltipItem.index];
                                             var val = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
                                             return label + ':' + val + ' (' + (100 * val / @Html.Raw(Model.ActionsSummary.Sum(d => d.Value))).toFixed(2) + '%)';
