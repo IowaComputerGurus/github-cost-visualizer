@@ -40,11 +40,9 @@ namespace GitHubCostVisualizer.Web.Models
 
     public class ActionMinutesItem
     {
-        public string Repository { get; set; }
+        public string Label { get; set; }
         public decimal Minutes { get; set; }
         public decimal TotalCost { get; set; }
-        public string Workflow { get; set; }
     }
-
 
 }

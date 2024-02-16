@@ -68,7 +68,7 @@
                         @foreach (var item in Model.ActionMinutesByRepository)
                         {
                             <tr>
-                                <td>@item.Repository</td>
+                                <td>@item.Label</td>
                                 <td data-sort="@item.Minutes">@item.Minutes minutes</td>
                                 <td data-sort="@item.TotalCost">$@item.TotalCost</td>
                             </tr>
@@ -90,7 +90,7 @@
                                         backgroundColor: getColors(@Model.ActionMinutesByRepository.Count, 'primary', 'dark', 'secondary', 'light')
                                     }
                                 ],
-                                labels: [@Html.Raw(String.Join(", ", Model.ActionMinutesByRepository.Select(m => $"'{m.Repository}'")))]
+                                labels: [@Html.Raw(String.Join(", ", Model.ActionMinutesByRepository.Select(m => $"'{m.Label}'")))]
                             },
                             options: {
                                 tooltips: {
@@ -121,7 +121,7 @@
                         @foreach (var item in Model.ActionMinutesByWorkflow)
                         {
                             <tr>
-                                <td>@item.Workflow</td>
+                                <td>@item.Label</td>
                                 <td data-sort="@item.Minutes">@item.Minutes minutes</td>
                                 <td data-sort="@item.TotalCost">$@item.TotalCost</td>
                             </tr>

@@ -37,7 +37,7 @@ namespace GitHubCostVisualizer.Web.Processor
                                                into grp
                                                select new ActionMinutesItem
                                                {
-                                                   Repository = grp.Key,
+                                                   Label = grp.Key,
                                                    Minutes = grp.Sum(i => (int)i.Quantity),
                                                    TotalCost = grp.Sum(i => i.Quantity.GetValueOrDefault() * i.Multiplier.GetValueOrDefault() * i.PricePer.GetValueOrDefault())
                                                }).ToList();
@@ -49,7 +49,7 @@ namespace GitHubCostVisualizer.Web.Processor
                                              select new ActionMinutesItem
                                              {
                                                  Minutes = grp.Sum(i => (int)i.Quantity),
-                                                 Workflow = ($"{grp.Key.Repository} - {grp.Key.TrimmedWorkflow}").ToString(),
+                                                 Label = ($"{grp.Key.Repository} - {grp.Key.TrimmedWorkflow}").ToString(),
                                                  TotalCost = grp.Sum(i => i.Quantity.GetValueOrDefault() * i.Multiplier.GetValueOrDefault() * i.PricePer.GetValueOrDefault())
 
                                              }).ToList();
