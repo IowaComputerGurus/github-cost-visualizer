@@ -30,12 +30,19 @@ namespace GitHubCostVisualizer.Web.Models
         public int TotalBillableActionMinutes { get; set; }
         public decimal TotalActionMinutesCost { get; set; }
         public List<KeyValuePair<string, int>> ActionsSummary { get; set; }
-        public List<KeyValuePair<string, int>> ActionMinutesByRepository { get; set; }
-        public List<KeyValuePair<string, int>> ActionMinutesByWorkflow { get; set; }
+        public List<ActionMinutesItem> ActionMinutesByRepository { get; set; }
+        public List<ActionMinutesItem> ActionMinutesByWorkflow { get; set; }
         public decimal AverageDailyStorage { get; set; }
         public List<KeyValuePair<DateTime, decimal>> DailyStorageSummary { get; set; }
         public List<KeyValuePair<string, decimal>> AverageDailyStorageByRepo { get; set; }
-
         public DailyStorageData DailyStorageByRepo { get; set; }
     }
+
+    public class ActionMinutesItem
+    {
+        public string Label { get; set; }
+        public decimal Minutes { get; set; }
+        public decimal TotalCost { get; set; }
+    }
+
 }
