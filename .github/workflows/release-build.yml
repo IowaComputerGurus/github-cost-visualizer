@@ -61,7 +61,7 @@ jobs:
       uses: actions/download-artifact@v4
     
     - name: 'Deploy APP to Prod Server'
-      uses: azure/webapps-deploy@v2
+      uses: azure/webapps-deploy@v3
       with: 
         app-name: "githubcostvisualizer" 
         publish-profile: ${{ secrets.PROD_PROFILE  }} 
