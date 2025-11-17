@@ -1,4 +1,5 @@
 mode: ContinuousDeployment
+next-version: 1.0.0
 branches: 
   develop:
     regex: develop
@@ -7,16 +8,9 @@ branches:
     prevent-increment:
       when-current-commit-tagged: true
     source-branches: []
-  hotfix:
-    regex: hotfix[/-]
-    source-branches: [develop]
-    prevent-increment:
-      when-current-commit-tagged: true
-    is-release-branch: true
   pull-request:
-    regex: (pull|pull\-requests|pr)[/-]
-    label: 'pr'
-    label-number-pattern: '[/-](?<number>\d+)[-/]'
+    regex: ^(pull-requests|pull|pr)[\/-](?<Number>\d+)
+    label: 'pr{Number}'
     increment: Patch
     is-release-branch: false
     source-branches: []
