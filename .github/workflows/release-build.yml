@@ -42,7 +42,7 @@ jobs:
       run: dotnet publish "${{ env.webproject-path }}" --runtime win-x64 --configuration Release --output ./App --no-restore  -p:version=${{ steps.gitversion.outputs.majorMinorPatch }}
     - name: Store App Artifacts
       if: github.event_name != 'pull_request'
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: published-app
         path: App
